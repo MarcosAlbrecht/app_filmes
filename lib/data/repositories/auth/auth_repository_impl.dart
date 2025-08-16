@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:ffi';
 
 import 'package:cinebox/core/result/result.dart';
 import 'package:cinebox/data/exceptions/data_exception.dart';
@@ -18,9 +17,12 @@ class AuthRepositoryImpl implements AuthRepository {
   }) : _localStorageService = localStorageService,
        _googleSigninService = googleSigninService;
   @override
-  Future<Result<Bool>> isLogged() {
-    // TODO: implement isLogged
-    throw UnimplementedError();
+  Future<Result<bool>> isLogged() async {
+    final resultToken = await _localStorageService.getIdToken();
+    return switch (resultToken) {
+      Success<String>() => Success(true),
+      Failure<String>() => Success(false),
+    };
   }
 
   @override
@@ -44,8 +46,20 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Result<Unit>> signOut() {
-    // TODO: implement signOut
-    throw UnimplementedError();
+  Future<Result<Unit>> signOut() async {
+    final result = await _googleSigninService.signOut();
+    switch (result) {
+      case Success<Unit>():
+        final removeResult = await _localStorageService.removeIdToken();
+        switch (removeResult) {
+          case Success<Unit>():
+            return successOfUnit();
+          case Failure<Unit>(:final error):
+            log('Erro ao realizar logout ID Token');
+            return Failure(error);
+        }
+      case Failure<Unit>(:final error):
+        return Failure(error);
+    }
   }
 }
