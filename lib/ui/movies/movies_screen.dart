@@ -1,3 +1,4 @@
+import 'package:cinebox/ui/movies/widgets/genres_box.dart';
 import 'package:cinebox/ui/movies/widgets/movies_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,7 +14,15 @@ class _MoviesScreenState extends ConsumerState<MoviesScreen> {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
-      slivers: [MoviesAppBar()],
+      slivers: [
+        MoviesAppBar(),
+        SliverToBoxAdapter(
+          child: Container(
+            margin: EdgeInsets.only(top: 22),
+            child: GenresBox(),
+          ),
+        ),
+      ],
     );
   }
 }

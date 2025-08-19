@@ -13,11 +13,11 @@ class _MoviesAppBarState extends ConsumerState<MoviesAppBar> {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      expandedHeight: MediaQuery.sizeOf(context).height * .25,
       foregroundColor: Colors.black,
       surfaceTintColor: Colors.transparent,
       elevation: 0,
       pinned: true,
+      expandedHeight: MediaQuery.sizeOf(context).height * 0.25,
       flexibleSpace: FlexibleSpaceBar(
         titlePadding: EdgeInsets.only(
           left: 16,
@@ -47,7 +47,7 @@ class _MoviesAppBarState extends ConsumerState<MoviesAppBar> {
                 borderRadius: BorderRadius.circular(25),
                 borderSide: BorderSide.none,
               ),
-              hintText: 'Procurar filme',
+              hintText: 'Procurar Filme',
               hintStyle: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
