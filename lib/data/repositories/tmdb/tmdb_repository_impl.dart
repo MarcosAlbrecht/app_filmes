@@ -30,7 +30,7 @@ class TmdbRepositoryImpl implements TmdbRepository {
   @override
   Future<Result<List<Movie>>> getNowPlayingMovies({String language = 'pt-BR', int page = 1}) async {
     try {
-      final moviesData = await _tmdbService.getNowPlayingMovies(
+      final moviesData = await _tmdbService.getNowPlaingMovies(
         language: language,
         page: page,
       );

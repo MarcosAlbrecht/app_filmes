@@ -1,29 +1,44 @@
+import 'package:cinebox/ui/movies/widgets/commands/get_movies_by_category_command.dart';
 import 'package:cinebox/ui/movies/widgets/movies_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MoviesByCategory extends ConsumerStatefulWidget {
-  const MoviesByCategory({super.key});
-
+class MoviesByCategory extends ConsumerWidget {
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _MoviesByCategoryState();
-}
-
-class _MoviesByCategoryState extends ConsumerState<MoviesByCategory> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 130),
-      child: Column(
-        children: [
-          MoviesBox(
-            title: 'Mais populares',
-          ),
-          MoviesBox(
-            title: 'Top filmes',
-          ),
-        ],
+  Widget build(BuildContext context, WidgetRef ref) {
+    final movies = ref.watch(getMoviesByCategoryCommandProvider);
+    return movies.when(
+      loading: () => Padding(
+        padding: EdgeInsetsGeometry.all(20),
+        child: CircularProgressIndicator(),
       ),
+      error: (error, stackTrace) => Padding(
+        padding: EdgeInsetsGeometry.all(20),
+        child: Text('Erro ao buscar filmes'),
+      ),
+      data: (data) {
+        if (data == null) {
+          return Center(
+            child: Text('Nenum filme encontrado'),
+          );
+        }
+
+        return Container(
+          margin: EdgeInsets.only(bottom: 130),
+          child: Column(
+            children: [
+              MoviesBox(
+                title: 'Mais populares',
+                movies: data.popular,
+              ),
+              // MoviesBox(
+              //   title: 'Top filmes',
+              //   movies: [],
+              // ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
