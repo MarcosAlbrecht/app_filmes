@@ -10,7 +10,7 @@ class MoviesByCategory extends ConsumerWidget {
     return movies.when(
       loading: () => Padding(
         padding: EdgeInsetsGeometry.all(20),
-        child: CircularProgressIndicator(),
+        child: Center(child: CircularProgressIndicator()),
       ),
       error: (error, stackTrace) => Padding(
         padding: EdgeInsetsGeometry.all(20),
@@ -28,13 +28,21 @@ class MoviesByCategory extends ConsumerWidget {
           child: Column(
             children: [
               MoviesBox(
-                title: 'Mais populares',
+                title: 'Mais Populares',
                 movies: data.popular,
               ),
-              // MoviesBox(
-              //   title: 'Top filmes',
-              //   movies: [],
-              // ),
+              MoviesBox(
+                title: 'Melhores Avaliados',
+                movies: data.topRated,
+              ),
+              MoviesBox(
+                title: 'Em Cartaz',
+                movies: data.nowPlaying,
+              ),
+              MoviesBox(
+                title: 'Em Breve',
+                movies: data.upcoming,
+              ),
             ],
           ),
         );
