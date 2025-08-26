@@ -11,8 +11,7 @@ class LoginWithGoogleCommand extends _$LoginWithGoogleCommand {
 
   Future<void> execute() async {
     state = AsyncLoading();
-     state = AsyncData(null);
-     return;
+
     final authRepository = ref.read(authRepositoryProvider);
 
     final result = await authRepository.signIn();
