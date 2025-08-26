@@ -19,7 +19,7 @@ class MoviesByCategory extends ConsumerWidget {
       data: (data) {
         if (data == null) {
           return Center(
-            child: Text('Nenum filme encontrado'),
+            child: Text('Nenhum filme encontrado'),
           );
         }
 
