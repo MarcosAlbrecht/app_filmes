@@ -44,7 +44,7 @@ final class TmdbRestClientDioProvider extends $FunctionalProvider<Dio, Dio, Dio>
   }
 }
 
-String _$tmdbRestClientDioHash() => r'72312a400d3de0eda15655c0d7d32ab3bfe13515';
+String _$tmdbRestClientDioHash() => r'72b31351267510813ef980c68617783c67669fae';
 
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

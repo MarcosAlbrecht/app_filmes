@@ -18,9 +18,11 @@ class GetMoviesByCategoryCommand extends _$GetMoviesByCategoryCommand {
     final result = await getMoviesByCategoryUC.execute();
 
     state = switch (result) {
-      Success<MoviesByCategory>(value: final moviesByCategory) => AsyncData(moviesByCategory),
-
-      Failure() => AsyncError('Erro ao buscar filmes por categoria', StackTrace.current),
+      Success(value: final moviesByCategory) => AsyncData(moviesByCategory),
+      Failure() => AsyncError(
+        'Erro ao buscar filmes por categoria',
+        StackTrace.current,
+      ),
     };
   }
 }

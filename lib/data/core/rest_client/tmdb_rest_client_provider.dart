@@ -15,7 +15,7 @@ Dio tmdbRestClientDio(Ref ref) {
   );
 
   dio.options.headers['Content-Type'] = 'application/json';
-  dio.options.headers['Authorization'] = 'Berar ${Env.theMovieDbApiKey}';
+  dio.options.headers['Authorization'] = 'Bearer ${Env.theMovieDbApiKey}';
   dio.interceptors.addAll([
     LogInterceptor(
       request: true,
