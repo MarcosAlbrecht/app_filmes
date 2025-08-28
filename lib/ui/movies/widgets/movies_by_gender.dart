@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MoviesByGender extends ConsumerWidget {
+  const MoviesByGender({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final searchMovies = ref.watch(getMoviesByGenreCommandProvider);
