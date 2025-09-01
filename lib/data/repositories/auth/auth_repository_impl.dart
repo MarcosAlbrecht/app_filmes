@@ -15,15 +15,17 @@ class AuthRepositoryImpl implements AuthRepository {
   final AuthService _authService;
 
   AuthRepositoryImpl({
-    required AuthService authService,
     required LocalStorageService localStorageService,
     required GoogleSigninService googleSigninService,
+    required AuthService authService,
   }) : _localStorageService = localStorageService,
        _googleSigninService = googleSigninService,
        _authService = authService;
+
   @override
   Future<Result<bool>> isLogged() async {
     final resultToken = await _localStorageService.getIdToken();
+
     return switch (resultToken) {
       Success<String>() => Success(true),
       Failure<String>() => Success(false),
@@ -38,25 +40,26 @@ class AuthRepositoryImpl implements AuthRepository {
         try {
           await _localStorageService.saveIdToken(value);
           await _authService.auth();
-
           return successOfUnit();
         } on DioException catch (e, s) {
           log(
-            'Erro ao autenticar o usuario no beckend',
+            'Erro ao autenticar o usuário no backend',
             name: 'AuthRepository',
+            error: e,
             stackTrace: s,
           );
-          return Failure(DataException(message: 'Erro ao realizar login no backend'));
+          return Failure(
+            DataException(message: 'Erro ao realizar login no backend'),
+          );
         }
-
       case Failure<String>(:final error):
         log(
-          'Erro ao realizar o login com o Goole',
+          'Erro ao realizar login com o Google',
           name: 'AuthRepository',
           error: error,
         );
         return Failure(
-          DataException(message: 'Erro ao realozar o login com o Google'),
+          DataException(message: 'Erro ao realizar login com a Google'),
         );
     }
   }

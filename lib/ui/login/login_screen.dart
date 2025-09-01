@@ -26,7 +26,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> with LoaderAndMessage
         },
       );
     });
-
     return Scaffold(
       body: Stack(
         children: [

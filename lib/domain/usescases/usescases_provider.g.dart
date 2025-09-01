@@ -53,7 +53,7 @@ final class GetMoviesByCategoryUsecaseProvider
 }
 
 String _$getMoviesByCategoryUsecaseHash() =>
-    r'ee1e937b2a6758ba1014ec7b0a329dcbccfeda95';
+    r'84e67e1ae090f69afae985bbefd12e0e68cf6526';
 
 @ProviderFor(getMoviesByGenreUsecase)
 const getMoviesByGenreUsecaseProvider = GetMoviesByGenreUsecaseProvider._();
@@ -101,7 +101,7 @@ final class GetMoviesByGenreUsecaseProvider
 }
 
 String _$getMoviesByGenreUsecaseHash() =>
-    r'd9791832e62d9206423659405e8e26278f8cb537';
+    r'52403765a3169dd10e1cd5ed9c461a3728b01bf6';
 
 @ProviderFor(getMoviesByNameUsecase)
 const getMoviesByNameUsecaseProvider = GetMoviesByNameUsecaseProvider._();
@@ -149,7 +149,7 @@ final class GetMoviesByNameUsecaseProvider
 }
 
 String _$getMoviesByNameUsecaseHash() =>
-    r'1a19b66c7376e56d9ab44dc69661be8e6863ed2a';
+    r'c110ec00a5e3ed71d949ce9f03b95b2c70353317';
 
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -9,15 +9,13 @@ class GoogleSigninServiceImpl implements GoogleSigninService {
   @override
   Future<Result<String>> isSignedIn() async {
     try {
-      final logged = await GoogleSignIn.instance
-          .attemptLightweightAuthentication();
+      final logged = await GoogleSignIn.instance.attemptLightweightAuthentication();
 
       if (logged case GoogleSignInAccount(
         authentication: GoogleSignInAuthentication(:final idToken?),
       )) {
         return Success(idToken);
       }
-
       return Failure(Exception('User is not signed in Google'));
     } catch (e, s) {
       log(
@@ -26,9 +24,8 @@ class GoogleSigninServiceImpl implements GoogleSigninService {
         error: e,
         stackTrace: s,
       );
+      return Failure(Exception('User is not signed in Google'));
     }
-
-    return Failure(Exception('User is not signed in Google'));
   }
 
   @override
@@ -43,18 +40,20 @@ class GoogleSigninServiceImpl implements GoogleSigninService {
       )) {
         return Success(idToken);
       }
-
-      return Failure(Exception('Failed to retrive ID token Google SignIn'));
+      return Failure(
+        Exception('Failed to retrive ID Token from Google Sign-In'),
+      );
     } catch (e, s) {
       log(
-        'Failed to retrive ID token Google SignIn',
+        'Failed to retrive ID Token from Google Sign-In',
         name: 'GoogleSignInService',
         error: e,
         stackTrace: s,
       );
+      return Failure(
+        Exception('Failed to retrive ID Token from Google Sign-In'),
+      );
     }
-
-    return Failure(Exception('Failed to retrive ID token Google SignIn'));
   }
 
   @override
@@ -64,13 +63,14 @@ class GoogleSigninServiceImpl implements GoogleSigninService {
       return successOfUnit();
     } catch (e, s) {
       log(
-        'Google SignOut error',
+        'Google Sign-Out error',
         name: 'GoogleSignInService',
         error: e,
         stackTrace: s,
       );
+      return Failure(
+        Exception('Google Sign-out error'),
+      );
     }
-
-    return Failure(Exception('Google SignOut error'));
   }
 }

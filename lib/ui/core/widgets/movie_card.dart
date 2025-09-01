@@ -99,7 +99,7 @@ class _MovieCardState extends ConsumerState<MovieCard> {
               child: IconButton(
                 onPressed: () {},
                 icon: Icon(
-                  Icons.favorite_border,
+                  widget.isFavorite ? Icons.favorite : Icons.favorite_border,
                   size: 16,
                 ),
               ),
