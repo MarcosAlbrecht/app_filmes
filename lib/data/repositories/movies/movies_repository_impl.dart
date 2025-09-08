@@ -34,7 +34,7 @@ class MoviesRepositoryImpl implements MoviesRepository {
   }
 
   @override
-  Future<Result<Unit>> deleteMovie(int movieId) async {
+  Future<Result<Unit>> deleteFavoriteMovie(int movieId) async {
     try {
       await _moviesService.deleteFavoriteMovie(movieId);
       return successOfUnit();
@@ -50,7 +50,7 @@ class MoviesRepositoryImpl implements MoviesRepository {
       await _moviesService.saveFavoriteMovie(
         SaveFavoriteMovie(
           movieId: favoriteMovie.id,
-          postUrl: favoriteMovie.posterPath,
+          posterUrl: favoriteMovie.posterPath,
           title: favoriteMovie.title,
           year: favoriteMovie.year,
         ),
