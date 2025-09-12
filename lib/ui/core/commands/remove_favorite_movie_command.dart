@@ -19,7 +19,7 @@ class RemoveFavoriteMovieCommand extends _$RemoveFavoriteMovieCommand {
     final result = await repo.deleteFavoriteMovie(movieId);
     switch (result) {
       case Success():
-        log('Filme ${movieId} deletado do favorito');
+        log('Filme $movieId deletado do favorito');
       case Failure(:final error):
         favoriteMovieCommand.setFavorite(true);
         state = AsyncError(error, StackTrace.current);
