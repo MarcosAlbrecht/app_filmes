@@ -118,17 +118,17 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> with Load
                         style: AppTextStyles.regularSmall,
                       ),
                       Text(
-                        'O Coringa é um vilão complexo da DC Comics, arqui-inimigo do Batman, conhecido por sua inteligência genial, senso de humor cruel e aparência de palhaço, que utiliza química e improvisação para semear o caos na cidade de Gotham e manipular as pessoas. Sua personalidade anarquista e psicopata, que encontra prazer na desgraça alheia, o torna um dos mais famosos e icónicos vilões dos quadrinhos, representando o conflito entre ordem e caos.',
+                        data.overview,
                         style: AppTextStyles.regularSmall,
                       ),
-                      CastBox(),
-                      MovieTrailer(),
+                      CastBox(movieDetail: data),
+                      if (data.videos.isNotEmpty) MovieTrailer(videoId: data.videos.first),
                       const SizedBox(
                         height: 30,
                       ),
                       RatingPanel(
-                        voteAverage: 20,
-                        voteCount: 20,
+                        voteAverage: data.voteAverage,
+                        voteCount: data.voteCount,
                       ),
                     ],
                   ),

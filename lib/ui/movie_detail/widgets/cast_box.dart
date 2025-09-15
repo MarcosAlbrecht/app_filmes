@@ -1,10 +1,16 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cinebox/domain/models/movie_detail.dart';
 import 'package:cinebox/ui/core/themes/colors.dart';
 import 'package:cinebox/ui/core/themes/text_styles.dart';
 import 'package:cinebox/ui/movie_detail/widgets/actor_card.dart';
 import 'package:flutter/material.dart';
 
 class CastBox extends StatelessWidget {
-  const CastBox({super.key});
+  final MovieDetail movieDetail;
+  const CastBox({
+    super.key,
+    required this.movieDetail,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,15 +29,15 @@ class CastBox extends StatelessWidget {
             height: 150,
 
             child: ListView.builder(
-              itemCount: 10,
+              itemCount: movieDetail.cast.length,
               scrollDirection: Axis.horizontal,
               physics: BouncingScrollPhysics(),
               itemBuilder: (context, index) {
+                final actor = movieDetail.cast[index];
                 return ActorCard(
-                  imageUrl:
-                      'https://conteudo.imguol.com.br/c/entretenimento/38/2019/10/16/o-coringa-de-rousseau-o-homem-nasce-livre-e-por-toda-a-parte-encontra-se-a-ferros-1571252808188_v2_900x506.jpg',
-                  name: 'Marcos R. Albrecht',
-                  character: 'Coringa',
+                  imageUrl: 'https://images.tmdb.org/t/p/w154/${actor.profilePath}',
+                  name: actor.name,
+                  character: actor.character,
                 );
               },
             ),
