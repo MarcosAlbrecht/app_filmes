@@ -5,6 +5,7 @@ import 'package:cinebox/data/exceptions/data_exception.dart';
 import 'package:cinebox/data/mappers/movie_mappers.dart';
 import 'package:cinebox/data/repositories/tmdb/tmdb_repository.dart';
 import 'package:cinebox/data/services/tmdb/tmdb_service.dart';
+import 'package:cinebox/domain/models/cast.dart';
 import 'package:cinebox/domain/models/genre.dart';
 import 'package:cinebox/domain/models/movie.dart';
 import 'package:cinebox/domain/models/movie_detail.dart';
