@@ -5,6 +5,7 @@ import 'package:cinebox/data/exceptions/data_exception.dart';
 import 'package:cinebox/data/models/save_favorite_movie.dart';
 import 'package:cinebox/data/services/movies/movies_service.dart';
 import 'package:cinebox/domain/models/favorite_movie.dart';
+import 'package:dio/dio.dart';
 
 import './movies_repository.dart';
 
@@ -20,16 +21,18 @@ class MoviesRepositoryImpl implements MoviesRepository {
           .map(
             (f) => FavoriteMovie(
               id: f.movieId,
-              posterPath: f.posterUrl,
               title: f.title,
+              posterPath: f.posterUrl,
               year: f.year,
             ),
           )
           .toList();
       return Success(favorites);
-    } on Exception catch (e, s) {
+    } on DioException catch (e, s) {
       log('Erro ao buscar os filmes favoritos', error: e, stackTrace: s);
-      return Failure(DataException(message: 'Erro ao buscar os filmes favoritos'));
+      return Failure(
+        DataException(message: 'Erro ao buscar os filmes favoritos'),
+      );
     }
   }
 

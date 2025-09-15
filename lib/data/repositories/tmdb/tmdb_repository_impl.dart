@@ -103,9 +103,11 @@ class TmdbRepositoryImpl implements TmdbRepository {
     try {
       final data = await _tmdbService.searchMovies(query: query);
       return Success(MovieMappers.mapToMovies(data));
-    } on Exception catch (e, s) {
+    } on DioException catch (e, s) {
       log('Erro ao buscar filmes por nome', error: e, stackTrace: s);
-      return Failure(DataException(message: 'Erro ao buscar filmes por nome'));
+      return Failure(
+        DataException(message: 'Erro ao buscar filmes por nome'),
+      );
     }
   }
 

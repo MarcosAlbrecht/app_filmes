@@ -12,11 +12,15 @@ class SearchMoviesByNameCommand extends _$SearchMoviesByNameCommand {
 
   Future<void> execute(String name) async {
     state = AsyncLoading();
-    final searchMoviesUC = ref.read(getMoviesByNameUsecaseProvider);
-    final moviesResult = await searchMoviesUC.execute(name: name);
-    state = switch (moviesResult) {
-      Success<List<Movie>>(:final value) => AsyncData(value),
-      Failure() => AsyncError('Erro ao buscar filmes', StackTrace.current),
+    final searchMovieUC = ref.read(getMoviesByNameUsecaseProvider);
+    final result = await searchMovieUC.execute(name: name);
+
+    state = switch (result) {
+      Success(:final value) => AsyncData(value),
+      Failure() => AsyncError(
+        Exception('Erro ao buscar filmes'),
+        StackTrace.current,
+      ),
     };
   }
 }

@@ -13,10 +13,13 @@ class GetMoviesByGenreCommand extends _$GetMoviesByGenreCommand {
   Future<void> execute(int genreId) async {
     state = AsyncLoading();
     final genreUC = ref.read(getMoviesByGenreUsecaseProvider);
-    final Result<List<Movie>> result = await genreUC.execute(genreId: genreId);
+    final result = await genreUC.execute(genreId: genreId);
     state = switch (result) {
-      Success<List<Movie>>(:final value) => AsyncData(value),
-      Failure<List<Movie>>() => AsyncError(Exception('Erro ao buscar filmes por genero'), StackTrace.current),
+      Success(:final value) => AsyncData(value),
+      Failure() => AsyncError(
+        Exception('Erro ao buscar Filmes por genero'),
+        StackTrace.current,
+      ),
     };
   }
 }

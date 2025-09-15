@@ -9,27 +9,28 @@ class GetMoviesByGenreUsecase {
   final TmdbRepository _tmdbRepository;
   final MoviesRepository _moviesRepository;
 
-  GetMoviesByGenreUsecase({required TmdbRepository tmdbRepository, required MoviesRepository moviesRepository})
-    : _tmdbRepository = tmdbRepository,
-      _moviesRepository = moviesRepository;
+  GetMoviesByGenreUsecase({
+    required TmdbRepository tmdbRepository,
+    required MoviesRepository moviesRepository,
+  }) : _tmdbRepository = tmdbRepository,
+       _moviesRepository = moviesRepository;
 
   Future<Result<List<Movie>>> execute({required int genreId}) async {
     final results = await Future.wait([
-      _tmdbRepository.getMoviesByGenre(genreId: genreId),
       _moviesRepository.getMyFavoritesMovies(),
+      _tmdbRepository.getMoviesByGenre(
+        genreId: genreId,
+      ),
     ]);
 
     if (results case [
       Success<List<FavoriteMovie>>(value: final favorites),
       Success<List<Movie>>(value: final movieByGenre),
     ]) {
-      final favoritesIDs = favorites.map((e) => e.id).toList();
-
-      return Success(
-        movieByGenre.markAsFavorite(favoritesIDs),
-      );
+      final favoritesIDs = favorites.map((f) => f.id).toList();
+      return Success(movieByGenre.markAsFavorite(favoritesIDs));
     }
 
-    return Failure(Exception('Erro ao buscar filmes por gênero'));
+    return Failure(Exception('Erro ao buscar os filmes por generos'));
   }
 }
