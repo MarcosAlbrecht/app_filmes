@@ -57,7 +57,7 @@ final class RemoveFavoriteMovieCommandProvider
 }
 
 String _$removeFavoriteMovieCommandHash() =>
-    r'b0c19bd9fec12a1ed02f72260ba6142079786763';
+    r'80d946ee64d988e489648ebe1abe77b044f590a3';
 
 final class RemoveFavoriteMovieCommandFamily extends $Family
     with

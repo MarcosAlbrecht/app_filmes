@@ -7,6 +7,7 @@ import 'package:cinebox/data/repositories/tmdb/tmdb_repository.dart';
 import 'package:cinebox/data/services/tmdb/tmdb_service.dart';
 import 'package:cinebox/domain/models/genre.dart';
 import 'package:cinebox/domain/models/movie.dart';
+import 'package:cinebox/domain/models/movie_detail.dart';
 import 'package:dio/dio.dart';
 
 class TmdbRepositoryImpl implements TmdbRepository {
@@ -104,6 +105,33 @@ class TmdbRepositoryImpl implements TmdbRepository {
     } on Exception catch (e, s) {
       log('Erro ao buscar filmes por nome', error: e, stackTrace: s);
       return Failure(DataException(message: 'Erro ao buscar filmes por nome'));
+    }
+  }
+
+  @override
+  Future<Result<MovieDetail>> getMovieDetail(int movieId) async {
+    try {
+      final response = await _tmdbService.getMovieDetails(
+        movieId,
+        appendToResponse: 'credits,videos,recommendations,release,images',
+      );
+      final movieDetail = MovieDetail(
+        title: response.title,
+        overview: response.overview,
+        releaseDate: response.releaseDate,
+        runtime: response.runtime,
+        voteAverage: response.voteAverage,
+        voteCount: response.voteCount,
+        images: response.images.backdrops.map((i) => 'https://images.tmdb.org/t/p/w154/${i.filePath}').toList(),
+        cast: response.credits.cast.map((c) => Cast(name: c.name, character: c.character, profilePath: c.profilePath)).toList(),
+        genres: response.genres.map((g) => Genre(id: g.id, name: g.name)).toList(),
+        videos: response.videos.results.map((v) => v.key).toList(),
+      );
+
+      return Success(movieDetail);
+    } on Exception catch (e, s) {
+      log('Erro ao buscar filmes por nome', error: e, stackTrace: s);
+      return Failure(DataException(message: 'Erro ao buscar detalhes do filme'));
     }
   }
 }

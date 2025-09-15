@@ -52,7 +52,7 @@ final class FavoritesViewModelProvider
 }
 
 String _$favoritesViewModelHash() =>
-    r'07ca9b617804a1ead44373f7e4f8c40d216f4b6d';
+    r'd37f04f015645e32cf51edd56b1bf579ffe0a996';
 
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
